@@ -1,0 +1,16 @@
+Once user lands on the site it will show a dropdown menu to choose a city.
+
+Depending on what the user chooses, a chart will render to the dom of the registered organ donor rate in that city.
+
+The data is generates by scraping the https://beadonor.ca/community/list/asc/rank
+dater and then storing that data in firebase.
+Once that data is stored in firebase it will be used essentially as an api as read only data.
+
+I will need to pass the data up from the select component up to the parent and back down to the chart component to dynamically rerender the chart based on the selection.
+
+Stretch goals
+
+Implement another database of information from https://www.giftoflife.on.ca/en/publicreporting.htm#waitinglistbyage rendering different types of charts in the dom when a user either scrolls down or selects a button. For instance, a chart of how many are waiting for each organ will append to the dom on click of "currently waiting button".
+
+
+
