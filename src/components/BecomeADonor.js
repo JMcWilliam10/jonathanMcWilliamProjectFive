@@ -9,11 +9,13 @@ class BecomeADonor extends Component {
 
   render() {
     return (
-      <>
+      <section>
         <div>
-          <a href="www.beadonor.ca">I Want To Become A Donor</a>
+          <a href="www.beadonor.ca">
+            Become A <span>Donor</span>
+          </a>
         </div>
-      </>
+      </section>
     );
   }
 }

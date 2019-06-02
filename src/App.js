@@ -2,9 +2,16 @@ import React, { Component } from "react";
 import Header from "./components/Header";
 import RegisteredDonorsChart from "./components/RegisteredDonorsChart";
 import firebase from "./firebase.js";
+import Compare from "./components/Compare";
 import Discussion from "./components/Discussion";
+import DiscussionTwo from "./components/DiscussionTwo";
+import Facts from "./components/Facts";
+import Fade from "react-reveal/Fade";
+import Theo from "./components/Theo";
 import Waiting from "./components/Waiting";
 import BecomeADonor from "./components/BecomeADonor";
+import ECG from "./components/ECG";
+import BarChart from "./components/BarChart";
 import Footer from "./components/Footer";
 import "./App.css";
 
@@ -12,7 +19,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      transplant: []
+      transplant: [],
+      comments: [],
+      time: ""
     };
   }
   onSelectedQuery = search => {
@@ -22,6 +31,12 @@ class App extends Component {
     });
   };
   componentDidMount() {
+    this.firstQuery();
+    this.secondQuery();
+    this.dateRange();
+  }
+
+  firstQuery() {
     const dbRef = firebase.database().ref();
     dbRef.on("value", response => {
       const newState = [];
@@ -30,46 +45,87 @@ class App extends Component {
       this.setState({
         transplant: newState
       });
-      console.log(this.state.transplant);
+      // console.log(this.state.transplant);
     });
   }
 
+  secondQuery() {
+    const dbRef2 = firebase.database().ref();
+    dbRef2.on("value", response => {
+      const secondState = [];
+      const dataTwo = response.val();
+      dataTwo[0].forEach(value => secondState.push(value));
+      this.setState({
+        comments: secondState
+      });
+      // console.log(this.state.comments);
+    });
+  }
+
+  dateRange() {
+    // Original sources to create this function
+    // https://stackoverflow.com/questions/23609042/how-to-avoid-octal-literals-are-not-allowed-in-strict-mode-with-createwritestr
+    // https://stackoverflow.com/questions/2627473/how-to-calculate-the-number-of-days-between-two-dates
+    const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+    const transplantDate = new Date("2016-07-25");
+    const today = new Date();
+
+    const diffDays = Math.round(
+      Math.abs((transplantDate.getTime() - today.getTime()) / oneDay)
+    );
+    //
+    this.setState({
+      time: diffDays
+    });
+  }
+  thirdQuery() {}
+
   render() {
     return (
-      <>
-        <div className="App">
-          <div className="wrapper">
-            <Header title="Registered Organ Donors" />
-            <main>
-              <div className="flexCharts">
-                <RegisteredDonorsChart
-                  chartData={this.state.chartData}
-                  selectButton={this.state.transplant}
-                  transplant={this.state.transplant}
-                />
-                <RegisteredDonorsChart
-                  chartData={this.state.chartData}
-                  selectButton={this.state.transplant}
-                  transplant={this.state.transplant}
-                />
-              </div>
-            </main>
+      <div className="App">
+        <div className="wrapper">
+          <ECG />
 
-            <section>
-              <div className="flex">
-                <Discussion />
-                <Waiting />
-              </div>
-            </section>
-            <section>
-              <BecomeADonor />
-            </section>
-            <section>
-              <Footer />
-            </section>
-          </div>
+          {/* <DiscussionTwo /> */}
+          <Fade cascade>
+            <h2>A Few Facts</h2>
+          </Fade>
+          <Facts />
+          <BarChart />
+          <Discussion
+            className="discussionSection"
+            transplant={this.state.transplant}
+          />
+          <Header title="Compare The Percentage of Registered Organ Donors in Ontario By City" />
+          <Compare
+            chartData={this.state.chartData}
+            transplant={this.state.transplant}
+          />
+          {/* <main>
+            <div className="flexCharts">
+              <RegisteredDonorsChart
+                className="left"
+                chartData={this.state.chartData}
+                transplant={this.state.transplant}
+                chart=".left"
+              />
+              <RegisteredDonorsChart
+                className="right"
+                chartData={this.state.chartData}
+                transplant={this.state.transplant}
+                chart=".right"
+              />
+            </div>
+          </main> */}
+          <Theo range={this.state.time} />
+          <Waiting
+            waiting=" Right now, there are 36 children waiting on organ donations in
+            Ontario"
+          />
+          <BecomeADonor />
+          <Footer />
         </div>
-      </>
+      </div>
     );
   }
 }

@@ -9,13 +9,15 @@ class Waiting extends Component {
 
   render() {
     return (
-      <div className="waiting">
-        <h2>Waiting on a Sunny Day</h2>
-        <p>
-          Right Now, There are 36 children waiting for Organ Donations in
-          Ontario
-        </p>
-      </div>
+      <section className="flex">
+        <div className="waiting">
+          <h2>{this.props.waiting}</h2>
+          {/* <p>
+            Right now, there are 36 children waiting on organ donations in
+            Ontario
+          </p> */}
+        </div>
+      </section>
     );
   }
 }

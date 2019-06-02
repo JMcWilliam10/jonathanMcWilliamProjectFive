@@ -4,69 +4,86 @@ import { Pie } from "react-chartjs-2";
 class RegisteredDonorsChart extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
-  }
-  componentWillMount() {
-    this.ChartData();
-  }
-  ChartData(a, b) {
-    this.setState({
+    this.state = {
+      testing: [],
       chartData: {
-        labels: ["Registered", "Not Registered"],
+        labels: ["Please Select The Dropdown"],
         datasets: [
           {
-            data: [a ? !null : 7, a ? !null : 7],
+            data: [100, 0],
+            backgroundColor: ["black"]
+          }
+        ]
+      }
+    };
+  }
+  chartData(a, b) {
+    this.setState({
+      percentageValue: {
+        DataOne: a,
+        Data: b
+      },
+      chartData: {
+        labels: ["Registered Percentage", "Non-Registered Percentage"],
+        datasets: [
+          {
+            data: [a, b],
             backgroundColor: ["rgba(0, 255, 0, 0.6)", "rgba(255, 0, 0, 0.6)"]
           }
         ]
       }
     });
   }
-
-  // handleChange(e) {
-  //   ChartData(33, 67);
-  // }
+  displayOne() {
+    return <div>Hello</div>;
+  }
+  displayTwo() {
+    return <div>Hello</div>;
+  }
   render() {
     return (
       <>
         <div>
           <div>
-            <Pie
-              data={this.state.chartData}
-              options={{
-                legend: {
-                  display: this.props.displayLegend,
-                  position: this.props.legendPosition
-                }
-              }}
-            />
+            <div className="chartWrapper">
+              <Pie
+                data={this.state.chartData}
+                options={{
+                  responsive: true,
+                  legend: {
+                    display: false,
+                    position: "bottom"
+                  }
+                }}
+              />
+            </div>
             <form className="dropDownForm" action="">
               <select
-                className=""
-                id="selectOne"
-                onChange={() =>
+                className={this.props.chart}
+                id=""
+                onChange={() => {
+                  const selectedOption = document.getElementsByClassName(
+                    this.props.chart
+                  )[0].selectedIndex;
+                  let chartValue = parseInt(
+                    this.props.transplant[selectedOption].DonorRegistrationRate
+                  );
+                  this.chartData(chartValue, 100 - chartValue);
                   this.setState({
-                    chartData: {
-                      labels: ["Registered", "Not Registered"],
-                      datasets: [
-                        {
-                          data: [2, 2]
-                        }
-                      ]
-                    }
-                  })
-                }
+                    testing: chartValue
+                  });
+                }}
               >
                 {this.props.transplant.map((item, i) => {
                   return (
-                    <option key={i} val={item.DonorRegistrationRate}>
+                    <option id={i} key={i} val={item.DonorRegistrationRate}>
                       {item.Communities}
                     </option>
                   );
                 })}
-                <button>Button</button>
               </select>
             </form>
+            {this.state.testing.length ? this.displayOne : this.displayTwo}
           </div>
         </div>
       </>
