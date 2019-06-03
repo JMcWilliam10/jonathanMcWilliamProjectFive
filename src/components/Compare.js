@@ -23,7 +23,6 @@ class Compare extends Component {
   recentSearches() {
     const dbRef2 = firebase.database().ref();
     dbRef2.on("value", response => {
-      const rightState = [];
       let leftState = [];
       let secondState = ["Toronto", "Kingston", "Napanee"];
       const dataTwo = response.val();
@@ -58,6 +57,7 @@ class Compare extends Component {
             onSelectedOptionChange={this.handleClick}
             recentSearches={this.state.recentSearches}
             nodeNumber="3"
+            title="🚧\/ Under Construction \/ 🚧"
           />
           <RegisteredDonorsChart
             className="right"
@@ -66,6 +66,7 @@ class Compare extends Component {
             chart=".right"
             recentSearches={this.state.recentSearch2}
             nodeNumber="2"
+            title="Recent Searches"
           />
         </div>
       </main>

@@ -122,7 +122,7 @@ class RegisteredDonorsChart extends Component {
               })}
             </select>
           </form>
-          <h4>Recent Searches</h4>
+          <h4>{this.props.title}</h4>
           <ul>
             {this.props.recentSearches
               .slice(
