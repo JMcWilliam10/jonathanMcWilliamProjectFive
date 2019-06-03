@@ -60,6 +60,10 @@ padding-left:15%;
 /* margin-left: -20vw; */
 
 }
+canvas{
+  max-width: 100%;
+  margin: 0 auto;
+}
 li{
    border-radius: 5%;
 }
@@ -310,7 +314,7 @@ footer{
   width: 100%;
 }
 
-@media (max-width: 800px){
+@media (max-width: 1065px){
   h1,h2,h3{
     font-size: 20px;
   }
