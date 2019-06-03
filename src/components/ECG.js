@@ -8,10 +8,6 @@ export default class ECG extends Component {
         <h2 className="theBeatGoesOn">
           ...The <span>Beat</span> Goes On
         </h2>
-        {/* <img
-          src="https://olimex.files.wordpress.com/2013/10/ecg.jpg"
-          alt="ECG monitor with a heart"
-        /> */}
       </div>
     );
   }

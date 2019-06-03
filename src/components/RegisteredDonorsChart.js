@@ -10,6 +10,7 @@ class RegisteredDonorsChart extends Component {
     this.state = {
       testing: [],
       city: [],
+      recentSearch2: [],
       recentSearches: ["Toronto", "Kingston", "Toronto"],
       chartData: {
         labels: ["Please Select The Dropdown"],
@@ -42,21 +43,7 @@ class RegisteredDonorsChart extends Component {
   componentDidMount() {
     this.inputRef.current.focus();
     console.log(this.inputRef);
-    this.recentSearches();
-  }
-
-  recentSearches() {
-    const dbRef2 = firebase.database().ref();
-    // console.log(dbRef2);
-    dbRef2.on("value", response => {
-      const secondState = [];
-      const dataTwo = response.val();
-      dataTwo[0].forEach(value => secondState.push(value));
-      this.setState({
-        city: secondState
-      });
-      console.log(this.state.city);
-    });
+    // this.recentSearches();
   }
 
   displayOne() {
@@ -70,17 +57,29 @@ class RegisteredDonorsChart extends Component {
   }
   clickHandler = () => {
     let recentSearch = this.inputRef.current.value;
-    console.log(recentSearch);
+    // pass the node number down to the registered donors chart from compare
+    // render a data attribute value in the select element via props
+    // grab the data attribute value in click handler and store it in a variable
+    // pass that variable to .ref()
+    //  when referencing our database
+    console.log(this.inputRef.current);
 
+    let dataForFirebase = this.inputRef.current.id;
+    console.log(dataForFirebase);
+
+    const dbRef = firebase.database().ref(dataForFirebase);
+    dbRef.push(recentSearch);
     this.setState({
       recentSearches: [...this.state.recentSearches, recentSearch]
     });
+    // this.setState({
+    //   recentSearch2: [...this.state.recentSearch2, recentSearch]
+    // });
   };
   render() {
     return (
       <>
         <div>
-          {/* <div> */}
           <div className="chartWrapper">
             <Pie
               data={this.state.chartData}
@@ -97,7 +96,7 @@ class RegisteredDonorsChart extends Component {
             <select
               ref={this.inputRef}
               className={this.props.chart}
-              id=""
+              id={this.props.nodeNumber}
               onChange={() => {
                 const selectedOption = document.getElementsByClassName(
                   this.props.chart
@@ -124,24 +123,21 @@ class RegisteredDonorsChart extends Component {
             </select>
           </form>
           <h4>Recent Searches</h4>
-          {/* <button onClick={this.clickHandler}>Click</button> */}
           <ul>
-            {this.state.recentSearches
+            {this.props.recentSearches
               .slice(
-                this.state.recentSearches.length - 3,
-                this.state.recentSearches.length
+                this.props.recentSearches.length - 3,
+                this.props.recentSearches.length
               )
               .map((item, i) => {
                 return (
-                  <li ket={i} className="fade">
+                  <li key={i} className="fade">
                     <p>{item}</p>
                   </li>
                 );
               })}
           </ul>
-          {/* {this.state.testing.length ? this.displayOne : this.displayTwo} */}
         </div>
-        {/* </div> */}
       </>
     );
   }

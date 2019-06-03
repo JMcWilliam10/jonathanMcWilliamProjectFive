@@ -54,12 +54,13 @@ ul, li{
 }
 ul{
   display: flex;
+  flex-direction: column;
   width: 80%;
 padding-left:15%;
+/* margin-left: -20vw; */
 
 }
 li{
-   width: calc(100%/3);
    border-radius: 5%;
 }
 .heroImage{
@@ -227,7 +228,6 @@ right: 0;
   background: rgba(28, 202, 22, 0.486)
 }
 .fade:nth-of-type(3){
-
     background: rgb(28, 202, 22)
 }
 
