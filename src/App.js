@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Header from "./components/Header";
-import RegisteredDonorsChart from "./components/RegisteredDonorsChart";
+import CheckDonorStatus from "./components/CheckDonorStatus";
 import firebase from "./firebase.js";
 import Compare from "./components/Compare";
-import Discussion from "./components/Discussion";
+// import Discussion from "./components/Discussion";
 import DiscussionTwo from "./components/DiscussionTwo";
 import Facts from "./components/Facts";
 import Fade from "react-reveal/Fade";
@@ -13,6 +13,7 @@ import BecomeADonor from "./components/BecomeADonor";
 import ECG from "./components/ECG";
 import BarChart from "./components/BarChart";
 import Footer from "./components/Footer";
+import PageBreak from "./components/PageBreak";
 import "./App.css";
 
 class App extends Component {
@@ -21,7 +22,9 @@ class App extends Component {
     this.state = {
       transplant: [],
       comments: [],
-      time: ""
+      time: "",
+      firstChartValue: undefined,
+      secondChartValue: undefined
     };
   }
   onSelectedQuery = search => {
@@ -32,7 +35,7 @@ class App extends Component {
   };
   componentDidMount() {
     this.firstQuery();
-    this.secondQuery();
+    // this.secondQuery();
     this.dateRange();
   }
 
@@ -49,18 +52,18 @@ class App extends Component {
     });
   }
 
-  secondQuery() {
-    const dbRef2 = firebase.database().ref();
-    dbRef2.on("value", response => {
-      const secondState = [];
-      const dataTwo = response.val();
-      dataTwo[0].forEach(value => secondState.push(value));
-      this.setState({
-        comments: secondState
-      });
-      // console.log(this.state.comments);
-    });
-  }
+  // secondQuery() {
+  //   const dbRef2 = firebase.database().ref();
+  //   dbRef2.on("value", response => {
+  //     const secondState = [];
+  //     const dataTwo = response.val();
+  //     dataTwo[0].forEach(value => secondState.push(value));
+  //     this.setState({
+  //       comments: secondState
+  //     });
+  //     console.log(this.state.comments);
+  //   });
+  // }
 
   dateRange() {
     // Original sources to create this function
@@ -83,48 +86,22 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="wrapper">
-          <ECG />
-
-          {/* <DiscussionTwo /> */}
-          <Fade cascade>
-            <h2>A Few Facts</h2>
-          </Fade>
-          <Facts />
-          <BarChart />
-          <Discussion
-            className="discussionSection"
-            transplant={this.state.transplant}
-          />
-          <Header title="Compare The Percentage of Registered Organ Donors in Ontario By City" />
-          <Compare
-            chartData={this.state.chartData}
-            transplant={this.state.transplant}
-          />
-          {/* <main>
-            <div className="flexCharts">
-              <RegisteredDonorsChart
-                className="left"
-                chartData={this.state.chartData}
-                transplant={this.state.transplant}
-                chart=".left"
-              />
-              <RegisteredDonorsChart
-                className="right"
-                chartData={this.state.chartData}
-                transplant={this.state.transplant}
-                chart=".right"
-              />
-            </div>
-          </main> */}
-          <Theo range={this.state.time} />
-          <Waiting
-            waiting=" Right now, there are 36 children waiting on organ donations in
-            Ontario"
-          />
-          <BecomeADonor />
-          <Footer />
-        </div>
+        <ECG />
+        <Facts />
+        {/* <PageBreak /> */}
+        <BarChart />
+        {/* <PageBreak /> */}
+        <Header title="Compare The Percentage of Registered Organ Donors in Ontario By City" />
+        <Compare transplant={this.state.transplant} />
+        <Theo range={this.state.time} />
+        {/* <PageBreak /> */}
+        <Waiting
+          waiting="As of June 1, 2019, there are 36 children waiting on organ donations in
+            Ontario."
+        />
+        <CheckDonorStatus />
+        <BecomeADonor />
+        <Footer />
       </div>
     );
   }

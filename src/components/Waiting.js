@@ -10,12 +10,8 @@ class Waiting extends Component {
   render() {
     return (
       <section className="flex">
-        <div className="waiting">
+        <div className="waiting redHover">
           <h2>{this.props.waiting}</h2>
-          {/* <p>
-            Right now, there are 36 children waiting on organ donations in
-            Ontario
-          </p> */}
         </div>
       </section>
     );

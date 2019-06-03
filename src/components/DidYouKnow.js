@@ -27,10 +27,6 @@ class DidYouKnow extends Component {
       </>
     );
   }
-
-  // doNothing() {
-  //   return <div />;
-  // }
   render() {
     return (
       <div>

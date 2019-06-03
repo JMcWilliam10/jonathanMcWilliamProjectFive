@@ -2,6 +2,17 @@ import React, { Component } from "react";
 import RegisteredDonorsChart from "./RegisteredDonorsChart";
 
 class Compare extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+  handleClick(e) {
+    this.setState({
+      first: e
+    });
+  }
+
   render() {
     return (
       <main>
@@ -11,6 +22,7 @@ class Compare extends Component {
             chartData={this.props.chartData}
             transplant={this.props.transplant}
             chart=".left"
+            onSelectedOptionChange={this.handleClick}
           />
           <RegisteredDonorsChart
             className="right"

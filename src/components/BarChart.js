@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Bar } from "react-chartjs-2";
+import { HorizontalBar } from "react-chartjs-2";
 import Fade from "react-reveal/Fade";
 
 class BarChart extends Component {
@@ -8,18 +8,33 @@ class BarChart extends Component {
     this.state = {
       percentageValue: [],
       chartData: {
-        labels: ["Heart", "Lung", "Kidney", "Liver", "Pancreas"],
+        labels: [
+          "Kidney",
+          "Liver",
+          "Kidney/Pancreas",
+          "Heart",
+          "Lung",
+          "Other",
+          "Pancreas (Whole)",
+          "Heart/Lung",
+          "Small Bowel"
+        ],
         datasets: [
           {
-            label: "Population (millions)",
+            label: "Currently Waiting",
             backgroundColor: [
               "#3e95cd",
               "#8e5ea2",
               "#3cba9f",
+              "#c45850",
               "#e8c3b9",
-              "#c45850"
+              "#3e95cd",
+              "#8e5ea2",
+              "#3cba9f",
+              "#c45850",
+              "#e8c3b9"
             ],
-            data: [2478, 5267, 734, 784, 433]
+            data: [1131, 269, 63, 60, 50, 12, 11, 1, 1]
           }
         ]
       },
@@ -52,18 +67,37 @@ class BarChart extends Component {
   render() {
     return (
       <Fade>
-        <div className="chartWrapper">
-          <Bar
-            data={this.state.chartData}
-            options={{
-              responsive: true,
-              legend: {
-                display: false,
-                position: "bottom"
-              }
-            }}
-          />
-        </div>
+        <section className="barChart">
+          <h2>Ontarians Waiting For Organs By Category</h2>
+          <div className="chartWrapper">
+            <HorizontalBar
+              data={this.state.chartData}
+              options={{
+                responsive: true,
+                legend: {
+                  display: false
+                },
+                scales: {
+                  yAxes: [
+                    {
+                      ticks: {
+                        fontSize: 20
+                      }
+                    }
+                  ],
+                  xAxes: [
+                    {
+                      ticks: {
+                        fontSize: 20
+                      }
+                    }
+                  ]
+                },
+                fontColor: "#666"
+              }}
+            />
+          </div>
+        </section>
       </Fade>
     );
   }

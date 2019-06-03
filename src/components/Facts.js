@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import DidYouKnow from "./DidYouKnow";
+import Fade from "react-reveal/Fade";
 class Facts extends Component {
   constructor(props) {
     super(props);
@@ -10,6 +11,9 @@ class Facts extends Component {
   render() {
     return (
       <>
+        <Fade cascade>
+          <h2>A Few Facts</h2>
+        </Fade>
         <DidYouKnow
           imgClass="questionOneTwo"
           imgSrc="https://www.sparkontario.ca/sites/default/files/styles/new_opportunity_image/public/opportunity_images/tgln_heros.png?itok=LoxKCFJ_"
