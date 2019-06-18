@@ -81,6 +81,7 @@ class BarChart extends Component {
                   yAxes: [
                     {
                       ticks: {
+                        fontColor: "#fff",
                         fontSize: 20
                       }
                     }
@@ -88,6 +89,7 @@ class BarChart extends Component {
                   xAxes: [
                     {
                       ticks: {
+                        fontColor: "#fff",
                         fontSize: 20
                       }
                     }

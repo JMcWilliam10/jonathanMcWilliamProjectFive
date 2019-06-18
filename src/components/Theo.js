@@ -19,9 +19,6 @@ class Theo extends Component {
           </div>
 
           <div className="theo">
-            {/* <div>
-              <img src="https://i.imgur.com/81ow8KD.jpg" alt="" />
-            </div> */}
             <div>
               <img src="https://i.imgur.com/m7asSTx.jpg" alt="" />
             </div>
