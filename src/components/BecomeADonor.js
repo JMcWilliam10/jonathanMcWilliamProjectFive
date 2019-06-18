@@ -5,7 +5,7 @@ class BecomeADonor extends Component {
     return (
       <section>
         <div>
-          <a href="www.beadonor.ca">
+          <a href="https://www.beadonor.ca">
             Become A <span>Donor</span>
           </a>
         </div>
