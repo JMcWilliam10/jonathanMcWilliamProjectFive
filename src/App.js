@@ -96,7 +96,7 @@ class App extends Component {
         <Theo range={this.state.time} />
         {/* <PageBreak /> */}
         <Waiting
-          waiting="As of June 1, 2019, there are 36 children waiting on organ donations in
+          waiting="As of June 19, 2019, there are 31 children waiting on organ donations in
             Ontario."
         />
         <CheckDonorStatus />
