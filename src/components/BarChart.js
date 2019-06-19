@@ -34,7 +34,7 @@ class BarChart extends Component {
               "#c45850",
               "#e8c3b9"
             ],
-            data: [1131, 269, 63, 60, 50, 12, 11, 1, 1]
+            data: [1156, 276, 60, 56, 54, 12, 10, 0, 1]
           }
         ]
       },
@@ -64,7 +64,7 @@ class BarChart extends Component {
     return (
       <Fade>
         <section className="barChart">
-          <h2>Ontarians Waiting For Organs By Category</h2>
+          <h2>Ontarians Waiting For Organs By Category as of June 19, 2019 </h2>
           <div className="chartWrapper">
             <HorizontalBar
               data={this.state.chartData}
