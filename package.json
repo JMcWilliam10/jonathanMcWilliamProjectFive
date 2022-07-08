@@ -6,7 +6,7 @@
     "axios": "^0.18.0",
     "chart.js": "^2.8.0",
     "firebase": "^6.1.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "react": "^16.8.6",
     "react-animations": "^1.0.0",
     "react-chartjs-2": "^2.7.6",
